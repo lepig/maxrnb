@@ -1,21 +1,18 @@
 <?php
-
+if (PHP_SAPI !== 'cli') {
+    exit('请在命令行模式下运行');
+}
 include 'func.php';
 include 'inc/db.php';
 
 global $db;
 
-
-// $mid = 157;
-// $url = "http://maxrnb.cn/music-{$mid}.html";
-// $html_str = sendRequest($url);
-
-// getSongInfo($html_str);
-
 function worker() {
     static $mid = 0;
     $table = 'maxrnb';
     global $db;
+
+    // dd($db);
     
     if ($mid == 0) {
         $sql = "SELECT * FROM `maxrnb` ORDER BY `id` DESC LIMIT 1";
@@ -31,7 +28,6 @@ function worker() {
         $mid++;
     }
 
-    // dd($row);
 
     $url = "http://maxrnb.cn/music-{$mid}.html";
     $html_str = sendRequest($url);
@@ -46,10 +42,10 @@ function worker() {
     
     return $mp3info;
 }
+// worker();
 
 while (true) {
     $mp3info = worker();
     file_put_contents('/tmp/maxrnb.log', date('[Y-m-d H:i:s] ') . json_encode($mp3info) . PHP_EOL, FILE_APPEND);
     sleep(1);
-
 }
