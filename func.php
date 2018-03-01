@@ -68,6 +68,10 @@ function getSongInfo($html_str) {
     $elems = $dom->find('p[class=blue lt] a', 1); //同上，就是选择抓取到索引为1的数组对象
     $type = $elems->innertext;
 
+    //获取音乐封面图
+    $coverUrl = $dom->find('div[class=user lt]', 0)->children(0)->children(0)->src;
+    /** 也可以使用 $dom->find('div[class=user lt] a img', 0)->src; */
+
     //获取文件大小
     
     
@@ -82,7 +86,8 @@ function getSongInfo($html_str) {
         'title'  => $title,
         'singer' => $singer,
         'type'   => $type,
-        'url'    => $mp3url
+        'url'    => $mp3url,
+        'cover'  => $coverUrl,
     ];
     return $data;
 }

@@ -13,34 +13,35 @@ global $db;
 // getSongInfo($html_str);
 
 function worker() {
+    static $mid = 0;
     $table = 'maxrnb';
     global $db;
-    $sql = "SELECT * FROM `maxrnb` ORDER BY `id` DESC LIMIT 1";
-    $data = $db->query($sql);
-    $row = $data->fetch(PDO::FETCH_ASSOC);
+    
+    if ($mid == 0) {
+        $sql = "SELECT * FROM `maxrnb` ORDER BY `id` DESC LIMIT 1";
+        $data = $db->query($sql);
+        $row = $data->fetch(PDO::FETCH_ASSOC);
+
+        if (! empty($row)) {
+            $mid = $row['mid'] + 1;
+        } else {
+            $mid = 1;
+        }
+    } else {
+        $mid++;
+    }
 
     // dd($row);
 
-    if (! empty($row)) {
-        $mid = $row['mid'] + 1;
-        $url = "http://maxrnb.cn/music-{$mid}.html";
-        $html_str = sendRequest($url);
-        $mp3info = getSongInfo($html_str);
-
-        if (empty($mp3info)) { //数据不存在 继续+1
-            $mid += 1;
-            $url = "http://maxrnb.cn/music-{$mid}.html";
-            $html_str = sendRequest($url);
-            $mp3info = getSongInfo($html_str);
-        }
-    } else {
-        $mid = 1;
-    }
-
+    $url = "http://maxrnb.cn/music-{$mid}.html";
+    $html_str = sendRequest($url);
+    $mp3info = getSongInfo($html_str);
     $mp3info['mid'] = $mid;
 
     //入库
-    $result = $db->insert($table, $mp3info);
+    if (isset($mp3info['url'])) {
+        $result = $db->insert($table, $mp3info);
+    }
     // dump($result, $db->pdo->lastInsertId());
     
     return $mp3info;
