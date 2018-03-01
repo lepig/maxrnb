@@ -9,7 +9,9 @@ maxrnb.cn是我一直喜欢上的一个音乐论坛。菜单上面有个"听音�
 
 
 ## 使用方法
-将仓库中的`maxrnb.sql`文件导入到数据库中，然后在**命令行**下进入到程序根目录执行`php worker.php`即可。
+1. 将仓库中的`maxrnb.sql`文件导入到数据库中;
+2. 修改`config`目录下的`mysql.ini.sample`为`mysql.ini`，然后修改对应的数据库连接信息;
+3. 最后在**命令行**下进入到程序根目录执行`php worker.php`即可。
 
 抓取日志存放在`/tmp/maxrnb.log`中
 
