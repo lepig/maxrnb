@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="referrer" content="never">
-    <title>audio.js</title>
+    <title>MaxRnb.Cn</title>
     <meta content="width=device-width, initial-scale=0.6" name="viewport">
     <style>
         body { color: #666; font-family: sans-serif; line-height: 1.4; }
@@ -64,7 +64,7 @@
     </div>
 </div>
 
-<p class="credit"><a href="http://www.bensound.com/royalty-free-music/">Royalty Free Music from Bensound</a></p>
+<p class="credit" style="display: none;"><a href="http://www.bensound.com/royalty-free-music/">Royalty Free Music from Bensound</a></p>
 <a href="https://github.com/lepig/maxrnb"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://oss.v2url.com/2018/03/02/912bacdd2bcf7ca83db5ebbe7255c8af.png" alt="Fork me on GitHub"></a>
 </body>
 <script>
@@ -75,17 +75,14 @@
            url: "api.php",
            async: false, //先锁住浏览器，不然会加载另外的自执行方法
            success: function (json) {
-               // alert('c')
                playList(json);
 
            }
        });
        function playList(data) {
            for (var i = 0, l = data.length; i < l; i++) {
-               // console.log(data[i].url)
                var mp3url = data[i].url;
                var li = '<li><a href="#" data-src="' + mp3url + '">' +data[i].title+ ' - ' + data[i].singer + '</a></li>';
-               // alert(li)
                $("ol").append(li)
            }
        }
@@ -93,7 +90,6 @@
 </script>
 <script>
     $(function() {
-        // alert('b')
         // Setup the player to autoplay the next track
         var a = audiojs.createAll({
             trackEnded: function() {
