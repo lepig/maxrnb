@@ -39,3 +39,4 @@ https://item.jd.com/6833426.html
 CPU: i5-7200U
 Merory: 芝奇16G x 2
 DIsk: 三星970Evo Pro
+显卡: NVIDIA RTX2080 Ti
