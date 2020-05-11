@@ -36,9 +36,3 @@ https://item.jd.com/8074512.html
 https://item.jd.com/6833426.html
 
 ################开始增加软路由配置##############
-
-
-setp1
-
-setp2
-
