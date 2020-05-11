@@ -38,3 +38,4 @@ https://item.jd.com/6833426.html
 ################开始增加软路由配置##############
 CPU: i5-7200U
 Merory: 芝奇16G x 2
+DIsk: 三星970Evo Pro
